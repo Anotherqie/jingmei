@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>精美网站导航</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://source.unsplash.com/1600x900/?nature,landscape') no-repeat center center fixed;
+            background-size: cover;
+            text-align: center;
+            color: white;
+        }
+        h1 {
+            margin-top: 50px;
+        }
+        .search-bar {
+            margin: 20px;
+        }
+        input {
+            width: 60%;
+            padding: 10px;
+            border-radius: 20px;
+            border: none;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+        .nav-item {
+            width: 180px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            transition: 0.3s;
+        }
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .nav-item a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+        }
+        .nav-item img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>精美网站导航</h1>
+    <div class="search-bar">
+        <input type="text" id="search" placeholder="搜索网站...">
+    </div>
+    <div class="nav-container" id="nav-list">
+        <!-- 网站导航项 -->
+    </div>
+    <script>
+        const sites = [
+            { name: "百度", url: "https://www.baidu.com", icon: "https://www.baidu.com/favicon.ico" },
+            { name: "谷歌", url: "https://www.google.com", icon: "https://www.google.com/favicon.ico" },
+            { name: "哔哩哔哩", url: "https://www.bilibili.com", icon: "https://www.bilibili.com/favicon.ico" },
+            { name: "知乎", url: "https://www.zhihu.com", icon: "https://www.zhihu.com/favicon.ico" },
+            { name: "微博", url: "https://weibo.com", icon: "https://weibo.com/favicon.ico" },
+            { name: "GitHub", url: "https://github.com", icon: "https://github.com/favicon.ico" },
+            { name: "掘金", url: "https://juejin.cn", icon: "https://juejin.cn/favicon.ico" },
+            { name: "CSDN", url: "https://www.csdn.net", icon: "https://www.csdn.net/favicon.ico" }
+        ];
+
+        function loadSites(filter = "") {
+            const navList = document.getElementById("nav-list");
+            navList.innerHTML = "";
+            
+            sites.filter(site => site.name.includes(filter)).forEach(site => {
+                const siteElement = document.createElement("div");
+                siteElement.classList.add("nav-item");
+                siteElement.innerHTML = `
+                    <a href="${site.url}" target="_blank">
+                        <img src="${site.icon}" alt="${site.name}">
+                        ${site.name}
+                    </a>
+                `;
+                navList.appendChild(siteElement);
+            });
+        }
+
+        document.getElementById("search").addEventListener("input", function() {
+            loadSites(this.value);
+        });
+
+        window.onload = () => loadSites();
+    </script>
+</body>
+</html>
